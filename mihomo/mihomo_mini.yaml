@@ -1,0 +1,200 @@
+proxy-providers:
+  providers:
+    type: http
+    interval: 1800
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 🟢 直连
+    url: "机场链接"
+
+
+
+unified-delay: true
+tcp-concurrent: true
+global-client-fingerprint: chrome
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "dlg.io.mi.com"
+    - "+.push.apple.com"
+    - "+.apple.com"
+
+proxies:
+- name: "🟢 直连"
+  type: direct
+  udp: true
+
+
+pr: &pr {type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🏚️ 家宽节点, 🐸 手动切换, 🌐 全部节点, 🟢 直连]}
+
+
+# 策略组
+proxy-groups:
+  - {name: 🚀 节点选择, type: select, proxies: [🇭🇰 香港节点, 🇸🇬 新加坡节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🏚️ 家宽节点, 🐸 手动切换, 🌐 全部节点, 🟢 直连]}
+  - {name: 📹 YouTube, <<: *pr}
+  - {name: 🍀 Google, <<: *pr}
+  - {name: 🤖 ChatGPT, <<: *pr}
+  - {name: 👨🏿‍💻 GitHub, <<: *pr}
+  - {name: 🐬 OneDrive, <<: *pr}
+  - {name: 🪟 Microsoft, <<: *pr}
+  - {name: 🍎 Apple, <<: *pr}
+  - {name: 🇭🇰 流媒体, type: select, include-all: true, filter: "(?i)香港家宽|hgc|hkt|hkbn|alice香港|akile香港|全解锁"}
+  - {name: 🎵 TikTok, <<: *pr}
+  - {name: 📲 Telegram, <<: *pr}
+  - {name: 🎥 NETFLIX, <<: *pr}
+  - {name: 📽️ Disney, <<: *pr}
+  - {name: 📡 HBO, <<: *pr}
+  - {name: 📺 巴哈姆特, <<: *pr}
+  - {name: 🎮 游戏平台, <<: *pr}
+  - {name: 🌍 国外媒体, <<: *pr}
+  - {name: 🎯 全球直连, type: select, proxies: [🟢 直连, 🚀 节点选择]}
+  - {name: 🐟 漏网之鱼, <<: *pr}
+  - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|hk|hongkong|hong kong"}
+  - {name: 🇸🇬 新加坡节点, type: select, include-all: true, filter: "(?i)新加坡|坡|狮城|SG|sg|Singapore"}
+  - {name: 🇹🇼 台湾节点, type: select, include-all: true, filter: "(?i)台|新北|彰化|TW|tw|Taiwan"}
+  - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan"}
+  - {name: 🏚️ 家宽节点, type: select, include-all: true, filter: "(?i)家宽|hgc|hkt|hkbn|hinet"}
+  - {name: ♻️ 自动选择, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"}
+  - {name: 🐸 手动切换, type: select, include-all: true}
+  - {name: 🌐 全部节点, type: select, include-all: true}
+rules:
+  - DOMAIN-SUFFIX,yxvm.com,DIRECT
+  - DOMAIN-SUFFIX,blizzard.cn,DIRECT
+  - DOMAIN-SUFFIX,battlenet.com.cn,DIRECT
+  - DOMAIN-SUFFIX,tocmcc.cn,DIRECT
+  - DOMAIN-SUFFIX,blizzardgames.cn,DIRECT
+  - DOMAIN-SUFFIX,wowchina.com,DIRECT
+  - DOMAIN-SUFFIX,wclbox.com,DIRECT
+  - DOMAIN-SUFFIX,newbeebox.com,DIRECT
+  - DOMAIN-SUFFIX,newbeebox.com,DIRECT
+  - DOMAIN-SUFFIX,kmdogmgr.com,DIRECT
+  - DOMAIN-SUFFIX,tpa-hcdn.iqiyi.com,REJECT
+  - DOMAIN-SUFFIX,szbdyd.com,REJECT
+  - DOMAIN-SUFFIX,mcdn.bilivideo.cn,REJECT
+  - DOMAIN-SUFFIX,qnniu.com,DIRECT
+  - DOMAIN-SUFFIX,ddnsto.com,DIRECT
+  - DOMAIN-SUFFIX,tocmcc.cn,DIRECT
+  - DOMAIN-KEYWORD,wogg,DIRECT
+  - DOMAIN-SUFFIX,wogg.link,DIRECT
+  - DOMAIN-SUFFIX,wogg.xyz,DIRECT
+  - DOMAIN-SUFFIX,xxooo.cf,DIRECT
+  - DOMAIN-SUFFIX,gitcafe.net,DIRECT
+  - DOMAIN-SUFFIX,mobile-stream.api.mgtv.com,DIRECT
+  - DOMAIN-SUFFIX,apiyutu.com,DIRECT
+  - DOMAIN-SUFFIX,jingpinx.com,DIRECT
+  - DOMAIN-SUFFIX,vodimg.top,DIRECT
+  - DOMAIN-SUFFIX,apilsbzy1.com,DIRECT
+  - DOMAIN-SUFFIX,mdzyapi.com,DIRECT
+  - DOMAIN-SUFFIX,huawei8.live,DIRECT
+  - DOMAIN-SUFFIX,nikanba.live,DIRECT
+  - DOMAIN-SUFFIX,okzyw9.com,DIRECT
+  - DOMAIN-SUFFIX,shayuapi.com,DIRECT
+  - DOMAIN-SUFFIX,kkzy.me,DIRECT
+  - DOMAIN-SUFFIX,apisesehuzy.com,DIRECT
+  - DOMAIN-SUFFIX,xinlangapi.com,DIRECT
+  - DOMAIN-SUFFIX,onrender.com,DIRECT
+  - DOMAIN-SUFFIX,xiaohuangrentv.com,DIRECT
+  - DOMAIN-SUFFIX,apittzy.com,DIRECT
+  - DOMAIN-SUFFIX,wolongzyw.com,DIRECT
+  - DOMAIN-SUFFIX,heimuer.tv,DIRECT
+  - DOMAIN-SUFFIX,aosikazy.com,DIRECT
+  - DOMAIN,hw8.live,DIRECT
+  - DOMAIN-SUFFIX,hw8.live,DIRECT
+  - DOMAIN-SUFFIX,tmdb.org,DIRECT
+  - DOMAIN-SUFFIX,themoviedb.org,DIRECT
+  - DOMAIN-SUFFIX,doubanio.com,DIRECT
+  - DOMAIN,360zy.com,DIRECT
+  - DOMAIN,okzyw9.com,DIRECT
+  - DOMAIN,apilsbzy1.com,DIRECT
+  - DOMAIN,aosikazy.com,DIRECT
+  - DOMAIN-SUFFIX,aosikazy.com,DIRECT
+  - DOMAIN-SUFFIX,39kan.com,DIRECT
+  - DOMAIN,apisesehuzy.com,DIRECT
+  - DOMAIN,zpsps.com,DIRECT
+  - DOMAIN-SUFFIX,heimuer.xyz,DIRECT
+  - DOMAIN-SUFFIX,apilyzy.com,DIRECT
+  - DOMAIN-SUFFIX,mdzyapi.com,DIRECT
+  - DOMAIN-SUFFIX,heimuer.tv,DIRECT
+  - RULE-SET,apple_domain,🍎 Apple
+  - RULE-SET,icloud_domain,🍎 Apple
+  - RULE-SET,mytvsuper_domain,🇭🇰 流媒体
+  - RULE-SET,viu_domain,🇭🇰 流媒体
+  - RULE-SET,openai_domain,🤖 ChatGPT
+  - RULE-SET,github_domain,👨🏿‍💻 GitHub
+  - RULE-SET,youtube_domain,📹 YouTube
+  - RULE-SET,google_domain,🍀 Google
+  - RULE-SET,onedrive_domain,🐬 OneDrive
+  - RULE-SET,microsoft_domain,🪟 Microsoft
+  - RULE-SET,tiktok_domain,🎵 TikTok
+  - RULE-SET,hbo_domain,📡 HBO
+  - RULE-SET,disney_domain, 📽️ Disney
+  - RULE-SET,telegram_domain,📲 Telegram
+  - RULE-SET,netflix_domain,🎥 NETFLIX
+  - RULE-SET,bahamut_domain,📺 巴哈姆特
+  - RULE-SET,epic_domain,🎮 游戏平台
+  - RULE-SET,steam_domain,🎮 游戏平台
+  - RULE-SET,nvidia_domain,🎮 游戏平台
+  - RULE-SET,nintendo_domain,🎮 游戏平台
+  - RULE-SET,ProxyMedia_domain,🌍 国外媒体
+  - RULE-SET,geolocation-!cn,🚀 节点选择
+  - RULE-SET,private_domain,DIRECT
+  - RULE-SET,gfw_domain,DIRECT
+  - RULE-SET,cn_domain,🎯 全球直连
+  - DOMAIN-SUFFIX,cn,DIRECT
+  - GEOSITE,CN,DIRECT
+  - GEOIP,CN,DIRECT,no-resolve
+  - RULE-SET,google_ip,🍀 Google,no-resolve
+  - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
+  - RULE-SET,telegram_ip,📲 Telegram,no-resolve
+  - RULE-SET,cn_ip,🎯 全球直连,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  - MATCH,🐟 漏网之鱼
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+rule-providers: 
+  private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs" }
+  ProxyMedia_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo-lite/geosite/proxy.mrs" }
+  openai_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs" }
+  youtube_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs" }
+  google_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs" }
+  github_domain: { <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs" }
+  telegram_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs" }
+  netflix_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs" }
+  bahamut_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs" }
+  disney_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs" }
+  mytvsuper_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/mytvsuper.mrs" }
+  viu_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/viu.mrs" }
+  onedrive_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs" }
+  microsoft_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs" }
+  apple_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs" }
+  icloud_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/icloud.mrs" }
+  hbo_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/hbo.mrs" }
+  tiktok_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs" }
+  gfw_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs" }
+  epic_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs" }
+  steam_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs" }
+  nintendo_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nintendo.mrs" }
+  nvidia_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nvidia.mrs" }
+  geolocation-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs" }
+  cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs" }
+  cn_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs" }
+  google_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs" }
+  telegram_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs" }
+  netflix_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs" }
