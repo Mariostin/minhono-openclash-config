@@ -175,6 +175,7 @@ rules:
   - RULE-SET,Shopee,国外电商
   - RULE-SET,Shopify,国外电商
   - RULE-SET,GFW,节点选择
+  - RULE-SET,ifast_domain,全球直连
   - RULE-SET,geolocation-!cn,节点选择
   - RULE-SET,cn_domain,全球直连
   - RULE-SET,netflix_ip,NETFLIX,no-resolve
