@@ -11,7 +11,7 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 🟢 直连
-    url: "https://sub.jaooh.com/c/?token=a181a603769c1f98ad927e7367c7aa51"
+    url: "订阅链接"
     override:
       skip-cert-verify: true
       udp: true
