@@ -111,8 +111,8 @@ proxy-groups:
   - {name: Apple, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/apple.png"}
   - {name: 国外电商, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/shopping.png"}
   - {name: Spotify, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/spotify.png"}
-  - {name: 🌏 国内媒体, type: select, proxies: [全球直连, 新加坡自动, 日本自动, 台湾自动, 自动选择, 香港节点, 新加坡节点, 日本节点, 台湾节点, 全部节点, 🐸 手动切换, 节点选择]}
-  - {name: 🌎 国外媒体, type: select, <<: *pr, include-all: true, filter: "^((?!(直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).)*$"}
+  - {name: 国内媒体, type: select, proxies: [全球直连, 新加坡自动, 日本自动, 台湾自动, 自动选择, 香港节点, 新加坡节点, 日本节点, 台湾节点, 全部节点, 🐸 手动切换, 节点选择], icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/Chinese_media.png"}
+  - {name: 国外媒体,type: select, <<: *pr, include-all: true, exclude-filter: "(?i)(🟢 直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/global_media.png"}
   - {name: STEAM, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/steam.png"}
   - {name: 游戏平台, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/game.png"}
   - {name: Speedtest, type: select, include-all: true, filter: "^((?!(直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).)*$", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/speedtest.png"}
@@ -197,8 +197,8 @@ rules:
   - RULE-SET,instagram,Meta
   - RULE-SET,threads,Meta
   - RULE-SET,facebook_ip,Meta,no-resolve
-  - RULE-SET,twitter_domain,🌎 国外媒体
-  - RULE-SET,Globalmedia,🌎 国外媒体
+  - RULE-SET,twitter_domain,国外媒体
+  - RULE-SET,media!cn_domain,国外媒体
   - RULE-SET,steam,STEAM
   - RULE-SET,Epic,游戏平台
   - RULE-SET,EA,游戏平台
@@ -209,19 +209,15 @@ rules:
   - RULE-SET,Nvidia,游戏平台
   - RULE-SET,Asus,游戏平台
   - RULE-SET,Amazon,国外电商
-  - RULE-SET,China'smedia,🌏 国内媒体
+  - RULE-SET,media_cn_domain,国内媒体
   - RULE-SET,bank_cn_domain,全球直连
   - RULE-SET,ai_cn_domain,全球直连
   - RULE-SET,xiaomi,全球直连
   - RULE-SET,iptv,全球直连
-  - RULE-SET,direct2,全球直连
-  - RULE-SET,direct1,全球直连
-  - RULE-SET,direct4,全球直连
-  - RULE-SET,direct3,全球直连
+  - RULE-SET,direct_blackmatrix7,全球直连
   - RULE-SET,steamcn,全球直连
   - RULE-SET,steamcdn,全球直连
   - RULE-SET,btdownload,全球直连
-  - RULE-SET,Chinacompany_ip,全球直连,no-resolve
   - RULE-SET,wangyiyu,全球直连
   - RULE-SET,Amazon_ip,国外电商,no-resolve
   - RULE-SET,Shopee,国外电商
@@ -231,7 +227,7 @@ rules:
   - RULE-SET,geolocation-!cn,节点选择
   - RULE-SET,cn_domain,全球直连
   - RULE-SET,netflix_ip,NETFLIX,no-resolve
-  - RULE-SET,twitter_ip,🌎 国外媒体,no-resolve
+  - RULE-SET,twitter_ip,国外媒体,no-resolve
   - RULE-SET,cn_ip,全球直连,no-resolve
   - MATCH,漏网之鱼
 rule-anchor:
@@ -255,10 +251,7 @@ rule-providers:
   banAd_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/ad.mrs" }
   mm_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/mm.mrs" }
 #直连域名
-  direct1: { <<: *class, url: "https://raw.githubusercontent.com/qichiyuhub/rule/master/Direct.list" }
-  direct2: { <<: *class, url: "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/rule/Custom_Direct.list" }
-  direct4: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.list" }
-  direct3: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.list" } 
+  direct_blackmatrix7: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.list" }
 #全球流媒体
   bahamut_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/bahamut.mrs" }
   netflix_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs" }
@@ -284,7 +277,7 @@ rule-providers:
 #游戏平台域名
   steam: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs" }
   EA: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ea.mrs" }
-  Blizzard: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Blizzard/Blizzard.list" }
+  Blizzard: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/blizzard.mrs" }
   Epic: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs" }
   Ubisoft: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ubisoft.mrs" }
   Sony: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sony.mrs" }
@@ -330,7 +323,7 @@ rule-providers:
   twitter_ip: { <<: *ip, url: "https://github.com/666OS/YYDS/raw/main/mihomo/rules/twitter_ip.mrs" }
   twitter_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs" }
 #全球流媒体综合
-  Globalmedia: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.list" }
+  media!cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-!cn.mrs" }
 #GFW域名
   GFW: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs" }
 #Cloudflare域名
@@ -343,6 +336,8 @@ rule-providers:
 
 #微信域名
   wechat: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/WeChat/WeChat.list" }
+#国内媒体
+  media_cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media-cn.mrs" }
 #国内ai
   ai_cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-cn.mrs" }
 #国内银行
@@ -354,11 +349,9 @@ rule-providers:
   proxymini: { <<: *class, url: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/Proxymini.list" }
 #国内域名和ip
   Direct_domain: { <<: *class, url: "https://raw.githubusercontent.com/Mariostin/clash-rule/refs/heads/main/rule%26icon/rule/Direct.list" }
-  Chinacompany_ip: { <<: *class, url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaCompanyIp.list" }
   cn_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs" }
   geolocation-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs" }
   cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs" }
-  China'smedia: { <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMedia/ChinaMedia.list" }
 #私人地址 
   private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs" }
 #其他
