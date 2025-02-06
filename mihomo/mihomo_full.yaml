@@ -1,5 +1,5 @@
 # 锚点
-pr: &pr {type: select, proxies: [节点选择, 新加坡自动, 日本自动, 台湾自动, 自动选择, 🇭🇰 香港节点, 🇭🇰 家宽节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇲 美国节点, 全部节点, 🐸 手动切换, 全球直连]}
+pr: &pr {type: select, proxies: [节点选择, 新加坡自动, 日本自动, 台湾自动, 美国自动, 自动选择, 香港节点, 家宽节点, 新加坡节点, 日本节点, 台湾节点, 美国节点, 全部节点, 🐸 手动切换, 全球直连]}
 
 # 机场订阅，名称不能重复
 proxy-providers:
@@ -58,6 +58,26 @@ sniffer:
     - "dlg.io.mi.com"
     - "+.push.apple.com"
     - "+.apple.com"
+    - '+.wechat.com'
+    - '+.qpic.cn'
+    - '+.qq.com'
+    - '+.wechatapp.com'
+    - '+.vivox.com'
+    # 向日葵服务
+    - '+.oray.com'
+    - '+.sunlogin.net'
+    
+# 代理模式
+tun:
+  enable: true
+  stack: system
+  mtu: 9000
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
     
 
  
@@ -72,7 +92,7 @@ proxies:
   
 # 策略组
 proxy-groups:
-  - {name: 节点选择, type: select, proxies: [新加坡自动, 日本自动, 台湾自动, 自动选择, 🇭🇰 香港节点, 🇭🇰 家宽节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 🇺🇲 美国节点, 全部节点, 🐸 手动切换, 🟢 直连], icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/select.png"}
+  - {name: 节点选择, type: select, proxies: [新加坡自动, 日本自动, 台湾自动, 美国自动, 自动选择, 香港节点, 家宽节点, 新加坡节点, 日本节点, 台湾节点, 美国节点, 全部节点, 🐸 手动切换, 🟢 直连], icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/select.png"}
   - {name: YouTube, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/youtube.png"}
   - {name: Google, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/google.png"}
   - {name: Meta, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/meta.png"}
@@ -81,17 +101,17 @@ proxy-groups:
   - {name: OneDrive, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/onedrive.png"}
   - {name: Microsoft, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/microsoft.png"}
   - {name: Telegram, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/telegram.png"}
-  - {name: 🇭🇰 流媒体, type: select, proxies: [🇭🇰 家宽节点, 🇭🇰 香港节点], icon: "https://raw.githubusercontent.com/Mariostin/clash-rule/refs/heads/main/rule%26icon/icon/mytvsuper.png"}
+  - {name: 🇭🇰 流媒体, type: select, proxies: [家宽节点, 香港节点], icon: "https://raw.githubusercontent.com/Mariostin/clash-rule/refs/heads/main/rule%26icon/icon/mytvsuper.png"}
   - {name: TikTok, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/tiktok.png"}
   - {name: NETFLIX, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/netfix.png"}
   - {name: DisneyPlus, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/disneyplus.png"}
-  - {name: 巴哈姆特, type: select, proxies: [🇹🇼 台湾节点, 台湾自动, 🇭🇰 家宽节点, 🇭🇰 香港节点], icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/bahamut.png"}
+  - {name: 巴哈姆特, type: select, proxies: [台湾节点, 台湾自动, 家宽节点, 香港节点], icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/bahamut.png"}
   - {name: HBO, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/hbo.png"}
   - {name: AppleTV, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/appletv.png"}
   - {name: Apple, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/apple.png"}
   - {name: 国外电商, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/shopping.png"}
   - {name: Spotify, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/spotify.png"}
-  - {name: 🌏 国内媒体, type: select, proxies: [全球直连, 新加坡自动, 日本自动, 台湾自动, 自动选择, 🇭🇰 香港节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇹🇼 台湾节点, 全部节点, 🐸 手动切换, 节点选择]}
+  - {name: 🌏 国内媒体, type: select, proxies: [全球直连, 新加坡自动, 日本自动, 台湾自动, 自动选择, 香港节点, 新加坡节点, 日本节点, 台湾节点, 全部节点, 🐸 手动切换, 节点选择]}
   - {name: 🌎 国外媒体, type: select, <<: *pr, include-all: true, filter: "^((?!(直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).)*$"}
   - {name: STEAM, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/steam.png"}
   - {name: 游戏平台, <<: *pr, icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/game.png"}
@@ -99,14 +119,14 @@ proxy-groups:
   - {name: 全球直连, type: select, proxies: [🟢 直连, 节点选择], icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/direct.png"}
   - {name: 隐私拦截, type: select, proxies: [🚫 拒绝, 🟢 直连], icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/block.png"}
   - {name: 漏网之鱼, type: select, <<: *pr, include-all: true, filter: "^((?!(直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).)*$", icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png"}
-  - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|hk|hongkong|hong kong"}
-  - {name: 🇭🇰 家宽节点, type: select, include-all: true, filter: "(?i)香港家宽|hgc|hkt|hkbn"}
-  - {name: 🇸🇬 新加坡节点, type: select, include-all: true, filter: "(?i)新|SG|Singapore"}
-  - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日|jp|japan"}
-  - {name: 🇹🇼 台湾节点, type: select, include-all: true, filter: "(?i)台|TW|Taiwan"}
-  - {name: 🇺🇲 美国节点, type: select, include-all: true, filter: "(?i)美|🇺🇲|US|(?i)States|America"}
-  - {name: 新加坡自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(新|SG|(?i)Singapore))^((?!(台|日|韩|港|深|美)).)*$", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/automation2.png"}
-  - {name: 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/automation2.png"}
+  - {name: 香港节点, type: select, include-all: true, filter: "(?i)港|hk|hongkong|hong kong", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/Hongkong.png"}
+  - {name: 家宽节点, type: select, include-all: true, filter: "(?i)香港家宽|hgc|hkt|hkbn", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/Hongkong.png"}
+  - {name: 新加坡节点, type: select, include-all: true, filter: "(?i)新加坡|SG|Singapore", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/Singapore.png"}
+  - {name: 日本节点, type: select, include-all: true, filter: "(?i)日本|jp|japan", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/Japan.png"}
+  - {name: 台湾节点, type: select, include-all: true, filter: "(?i)台|TW|Taiwan", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/Taiwan_China.png"}
+  - {name: 美国节点, type: select, include-all: true, filter: "(?i)美|🇺🇲|US|(?i)States|America", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/America.png"}
+  - {name: 新加坡自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(新加坡|SG|(?i)Singapore))^((?!(台|日|韩|港|深|美)).)*$", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/automation2.png"}
+  - {name: 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日本|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/automation2.png"}
   - {name: 台湾自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(新|日|韩|港|深|美)).)*$", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/automation2.png"}
   - {name: 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|🇺🇲|US|(?i)States|America))^((?!(港|台|日|韩|新|Wcloud|Russia)).)*$", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/automation2.png"}
   - {name: 自动选择, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).)*$", icon: "https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/icon/automation2.png"}
@@ -133,6 +153,7 @@ rules:
 #规则
   - RULE-SET,wechat,全球直连
   - RULE-SET,speedtest_domain,Speedtest
+  - RULE-SET,Bybit,台湾自动
   - RULE-SET,Cloudflare,节点选择
   - RULE-SET,proxymini,节点选择                                 
   - RULE-SET,ai,AI
@@ -326,3 +347,4 @@ rule-providers:
   private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs" }
 #其他
   ifast_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/ifast.mrs" }
+  Bybit: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/bybit.mrs" }
